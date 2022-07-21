@@ -22,6 +22,10 @@ class App extends React.Component {
     this.search = this.search.bind(this);
   }
 
+  componentDidMount () {
+    Spotify.getAccessToken()
+  }
+
   //removeTrack
 
   removeTrack(track) {
@@ -55,10 +59,10 @@ class App extends React.Component {
   //savePlaylist
   savePlaylist() {
     const trackUris = this.state.playlistTrack.map(track => track.uri);
-    Spotify.savePlayList(this.state.playlistName, trakUris).then(() => {
+    Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
       this.setState({
         playlistName: 'New Playlist' ,
-        playlistTracks: []
+        playlistTrack: []
       })
     })
   }
